@@ -27,4 +27,4 @@ n = 10
 
 resultado = integrar_trapecio(f, a, b, n)
 
-print(f"Resultado: {resultado}")
+print(f"Resultado trapecio: {resultado}")

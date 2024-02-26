@@ -44,5 +44,5 @@ max_iter = 100
 root = newton_raphson(f, f_prime, x0, tol, max_iter)
 
 if root is not None:
-  print(f"La raíz de la función es: {root}")
+  print(f"La raíz de la función es: {root} newton raphson")
 

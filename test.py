@@ -1,46 +1,25 @@
 import unittest
-from biseccion import metodo_biseccion
+from biseccion import biseccion
 from newtonraphson import newton_raphson
 from taylor_ import factorial, derivada_n, taylor
 from trapecio import integrar_trapecio
+from riemman import riemann_integral
 
-class TestMetodoBiseccion(unittest.TestCase):
+#Test biseccion
+class TestBiseccion(unittest.TestCase):
+    def test_biseccion(self):
+        # Definimos una función para la prueba
+        def f(x):
+            return x**2 - 4
 
-  def test_funcion_continua(self):
-    # Función continua
-    def f(x):
-      return x**2 - 2
+        # Usamos el método de bisección para encontrar la raíz
+        raiz = biseccion(f, 1, 3, tol=1e-6)
 
-    # Parámetros del método
-    a = 0
-    b = 2
-    tolerancia = 1e-6
-
-    # Aplicar el método de bisección
-    raiz, iteraciones = metodo_biseccion(f, a, b, tolerancia)
-
-    # Validar la aproximación de la raíz
-    self.assertAlmostEqual(raiz, 1.414213562373095, places=6)
-
-  def test_funcion_no_continua(self):
-    # Función no continua
-    def f(x):
-      if x < 0.5:
-        return 1
-      else:
-        return -1
-
-    # Parámetros del método
-    a = 0
-    b = 1
-    tolerancia = 1e-6
-
-    with self.assertRaises(ValueError):
-      metodo_biseccion(f, a, b, tolerancia)
+        # Verificamos que la raíz sea correcta con una tolerancia
+        self.assertAlmostEqual(raiz, 2, delta=1e-6)
 
 if __name__ == "__main__":
-  unittest.main()
-
+    unittest.main()
 
 #Test NewtonRaphson
 class TestNewtonRaphson(unittest.TestCase):
@@ -112,3 +91,20 @@ class TestIntegracionTrapecio(unittest.TestCase):
 
 if __name__ == "__main__":
   unittest.main()
+  
+#test Rieman
+  class TestRiemannIntegral(unittest.TestCase):
+    def test_riemann_integral(self):
+        # Definimos una función simple para la prueba
+        def f(x):
+            return x**2
+
+        # Calculamos la integral de x^2 de 0 a 1 con 1000 subdivisiones
+        result = riemann_integral(f, 0, 1, 1000)
+
+        # Sabemos que la integral exacta de x^2 de 0 a 1 es 1/3, así que comprobamos
+        # que nuestro resultado está cerca de eso con alguna tolerancia
+        self.assertAlmostEqual(result, 1/3, places=2)
+
+if __name__ == '__main__':
+    unittest.main()
